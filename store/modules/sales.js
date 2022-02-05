@@ -10,14 +10,13 @@ const getters = {
 
 const mutations = {
     SET_SALES: (state, payload) => {
-        state.text = payload.text;
-        state.image = payload.image;
+        state.sales = payload
     },
 };
 
 const actions = {
     GET_SALES: async (context) => {
-        await fetch("https://demo-api.vsdev.space/api/brom/home_page", {
+        await fetch("https://demo-api.vsdev.space/api/brom/sales", {
             method: "GET",
             headers: { "Content-Type": "application/json" },
         })
@@ -26,7 +25,7 @@ const actions = {
             })
             .then(
                 (result) => {
-                    context.commit("SET_HOME", result);
+                    context.commit("SET_SALES", result);
                 },
                 (error) => {
                     console.log(error);
