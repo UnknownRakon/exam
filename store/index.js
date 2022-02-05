@@ -1,6 +1,10 @@
-import data from "./modules/data";
+import count from "./modules/count";
+import home from "./modules/home";
+import about from "./modules/about";
 
 export const modules = {
-  data,
+  count,
+  home,
+  about
 };
 

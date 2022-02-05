@@ -23,9 +23,11 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+      <left-widget />
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-icon class="mx-2"> mdi-home-search </v-icon>
       <v-toolbar-title v-text="title" />
       <v-spacer />
     </v-app-bar>
@@ -34,16 +36,6 @@
         <Nuxt />
       </v-container>
     </v-main>
-    <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light> mdi-repeat </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
     <v-footer :absolute="!fixed" app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
@@ -51,8 +43,13 @@
 </template>
 
 <script>
+import LeftWidget from '../components/LeftWidget.vue'
+
 export default {
   name: 'DefaultLayout',
+  components: {
+    LeftWidget,
+  },
   data() {
     return {
       clipped: false,
@@ -61,19 +58,22 @@ export default {
       items: [
         {
           icon: 'mdi-apps',
-          title: 'Welcome',
+          title: 'Главная',
           to: '/',
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire',
+          title: 'О нас',
+          to: '/about',
+        },
+        {
+          icon: 'mdi-currency-usd ',
+          title: 'Объявления',
+          to: '/articles',
         },
       ],
       miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js',
+      title: 'Brom.ru',
     }
   },
 }
