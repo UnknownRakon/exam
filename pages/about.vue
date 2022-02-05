@@ -2,7 +2,7 @@
   <v-row justify="center" align="center">
     <v-col cols="12">
       <vue-loader v-if="load" />
-      <v-card class="mx-auto my-3" max-width="1200">
+      <v-card v-else class="mx-auto my-3" max-width="1200">
         <v-card-text>
           <v-row align="center" class="mx-0 my-5">
             <div class="grey--text ms-4" v-html="about.text" />

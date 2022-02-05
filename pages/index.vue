@@ -1,7 +1,8 @@
 <template>
   <v-row justify="center" align="center">
     <v-col cols="12">
-      <v-card class="mx-auto my-3" max-width="1200">
+      <vue-loader v-if="load" />
+      <v-card v-else class="mx-auto my-3" max-width="1200">
         <v-img height="500" :src="home.image"></v-img>
 
         <v-card-text>
@@ -15,8 +16,14 @@
 </template>
 
 <script>
+import VueLoader from '../components/Loader.vue'
+
 export default {
   name: 'IndexPage',
+  components: { VueLoader },
+  data() {
+    return { load: true }
+  },
   computed: {
     home() {
       return this.$store.getters.HOME
@@ -26,8 +33,9 @@ export default {
     this.fetchData()
   },
   methods: {
-    fetchData() {
-      this.$store.dispatch('GET_HOME')
+    async fetchData() {
+      await this.$store.dispatch('GET_HOME')
+      this.load = false
     },
   },
 }

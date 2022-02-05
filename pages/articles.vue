@@ -1,31 +1,22 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12">
-      <vue-loader v-if="load" />
-      <v-card
-        v-for="sale in sales"
-        :key="sale.id"
-        class="mx-auto my-3"
-        max-width="1200"
-      >
-        <v-img height="500"></v-img>
-        <v-card-text>
-          <v-row align="center" class="mx-0 my-5">
-            <div class="grey--text ms-4">{{ home.text }}</div>
-          </v-row>
-        </v-card-text>
-      </v-card>
-    </v-col>
-  </v-row>
+  <v-container fluid>
+    <v-btn v-if="!load" elevation="2" @click="show">Показать форму</v-btn>
+    <vue-form v-if="form" @add="fetchData" />
+    <vue-loader v-if="load" />
+    <vue-sales v-else :sales="sales" />
+  </v-container>
 </template>
 
 <script>
 import VueLoader from '../components/Loader.vue'
+import VueSales from '../components/Sale.vue'
+import VueForm from '../components/VueForm.vue'
+
 export default {
   name: 'ArticlesPage',
-  components: { VueLoader },
+  components: { VueLoader, VueSales, VueForm },
   data() {
-    return { load: true }
+    return { load: true, form: false }
   },
   computed: {
     sales() {
@@ -39,6 +30,9 @@ export default {
     async fetchData() {
       await this.$store.dispatch('GET_SALES')
       this.load = false
+    },
+    show() {
+      this.form = !this.form
     },
   },
 }

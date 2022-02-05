@@ -7,6 +7,6 @@ export const modules = {
   count,
   home,
   about,
-  sales
+  sales,
 };
 
